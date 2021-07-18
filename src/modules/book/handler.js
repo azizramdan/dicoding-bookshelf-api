@@ -69,6 +69,24 @@ const store = (request, h) => {
   }
 }
 
+const index = () => {
+  const booksFormatted = books.map(book => {
+    return {
+      id: book.id,
+      name: book.name,
+      publisher: book.publisher
+    }
+  })
+
+  return {
+    status: 'success',
+    data: {
+      books: booksFormatted
+    }
+  }
+}
+
 module.exports = {
   store,
+  index,
 };
