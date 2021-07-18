@@ -86,7 +86,26 @@ const index = () => {
   }
 }
 
+const show = (request, h) => {
+  const { bookId } = request.params
+  const book = books.find(el => el.id === bookId)
+
+  if (!book) return h.response({
+      status: 'fail',
+      message: 'Buku tidak ditemukan',
+    })
+    .code(404)
+
+  return {
+    status: 'success',
+    data: {
+      book
+    }
+  }
+}
+
 module.exports = {
   store,
   index,
+  show,
 };
