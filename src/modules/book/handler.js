@@ -69,8 +69,21 @@ const store = (request, h) => {
   }
 }
 
-const index = () => {
-  const booksFormatted = books.map(book => {
+const index = (request) => {
+  const { name, reading, finished } = request.query
+  let bookFiltered = books
+
+  if (name !== undefined) {
+    bookFiltered = bookFiltered.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))
+  }
+  if (reading !== undefined) {
+    bookFiltered = bookFiltered.filter(el => el.reading === (reading == 1))
+  }
+  if (finished !== undefined) {
+    bookFiltered = bookFiltered.filter(el => el.finished === (finished == 1))
+  }
+
+  bookFiltered = bookFiltered.map(book => {
     return {
       id: book.id,
       name: book.name,
@@ -81,8 +94,8 @@ const index = () => {
   return {
     status: 'success',
     data: {
-      books: booksFormatted
-    }
+      books: bookFiltered
+    },
   }
 }
 
