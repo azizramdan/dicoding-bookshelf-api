@@ -2,6 +2,7 @@
   "name": "bookshelf-api",
   "version": "1.0.0",
   "description": "Submission Bookshelf API Dicoding",
+  "homepage": "https://github.com/azizramdan/dicoding-bookshelf-api",
   "main": "./src/server.js",
   "scripts": {
     "start-prod": "NODE_ENV=production node ./src/server.js",
