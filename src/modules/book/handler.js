@@ -175,9 +175,37 @@ const update = (request, h) => {
   }
 }
 
+const destroy = (request, h) => {
+  const { bookId } = request.params
+  const bookIndex = books.findIndex(book => book.id === bookId)
+
+  if (bookIndex < 0) return h.response({
+      status: 'fail',
+      message: 'Buku gagal dihapus. Id tidak ditemukan',
+    })
+    .code(404)
+
+  try {
+    books.splice(bookIndex, 1)
+
+    return h.response({
+        status: 'success',
+        message: 'Buku berhasil dihapus',
+      })
+      .code(200);
+  } catch (error) {
+    return h.response({
+        status: 'error',
+        message: 'Buku gagal dihapus',
+      })
+      .code(500);
+  }
+}
+
 module.exports = {
   store,
   index,
   show,
   update,
+  destroy,
 };
